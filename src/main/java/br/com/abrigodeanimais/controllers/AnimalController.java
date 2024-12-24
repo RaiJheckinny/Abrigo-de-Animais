@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -28,5 +29,12 @@ public class AnimalController {
     public ResponseEntity<List<Animal>> getAll (){
         List<Animal> animaisDB = animalRepository.findAll();
         return new ResponseEntity<>(animaisDB, HttpStatus.OK);
+    }
+
+    @GetMapping("/recebedores")
+    public ResponseEntity<List<Object[]>> getAllRecebedor() {
+        LocalDate oneYearAgo = LocalDate.now().minusYears(1);
+        List<Object[]> recebedorDB = animalRepository.findByRecebedor(oneYearAgo);
+        return new ResponseEntity<>(recebedorDB, HttpStatus.OK);
     }
 }
