@@ -16,21 +16,30 @@ public class Animal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false)
     private String nomeProvisorio;
 
+    @Column(nullable = false)
     private Integer idadeEstimada;
 
-    private String raca;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "raca_id") // Cria a coluna no banco que referencia o Endereco
+    private Raca raca;
+
+    @Column(nullable = false)
     private LocalDate dataEntrada;
 
     private LocalDate dataAdocao;
 
+    @Column(nullable = false)
     private String condicaoChegada;
 
+    @Column(nullable = false)
     private String nomeRecebedor;
     private LocalDate dataObito;
 
+    @Column(nullable = false)
     private String porte;
 
     public String getNomeProvisorio() {
@@ -47,14 +56,6 @@ public class Animal {
 
     public void setIdadeEstimada(Integer idadeEstimada) {
         this.idadeEstimada = idadeEstimada;
-    }
-
-    public String getRaca() {
-        return raca;
-    }
-
-    public void setRaca(String raca) {
-        this.raca = raca;
     }
 
     public LocalDate getDataEntrada() {
@@ -107,5 +108,13 @@ public class Animal {
 
     public Integer getId() {
         return id;
+    }
+
+    public Raca getRaca() {
+        return raca;
+    }
+
+    public void setRaca(Raca raca) {
+        this.raca = raca;
     }
 }
